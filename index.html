@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FD Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        label { display: block; margin-top: 1em; }
+        input { padding: 0.5em; margin-top: 0.2em; width: 200px; }
+        button { margin-top: 1em; padding: 0.5em 1em; }
+        .result { margin-top: 1em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Fixed Deposit Calculator</h1>
+    <div>
+        <label>
+            Principal Amount:
+            <input type="number" id="principal" />
+        </label>
+        <label>
+            Annual Interest Rate (%):
+            <input type="number" id="rate" />
+        </label>
+        <label>
+            Time (years):
+            <input type="number" id="time" />
+        </label>
+        <button onclick="calculate()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculate() {
+            var principal = parseFloat(document.getElementById('principal').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+            var time = parseFloat(document.getElementById('time').value);
+            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                document.getElementById('result').textContent = 'Please enter valid numbers';
+                return;
+            }
+            var maturity = principal * Math.pow(1 + rate / 100, time);
+            document.getElementById('result').textContent =
+                'Maturity Amount: ' + maturity.toFixed(2);
+        }
+    </script>
+</body>
+</html>
